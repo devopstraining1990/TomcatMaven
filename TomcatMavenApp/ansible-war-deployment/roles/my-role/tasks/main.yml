@@ -1,0 +1,9 @@
+---
+- name: Copy a file to the remote host
+  copy:
+    src: test.txt
+    dest: /tmp/test.txt
+
+- name: Name of major version
+  debug:
+    msg: "{{ major_version }}"

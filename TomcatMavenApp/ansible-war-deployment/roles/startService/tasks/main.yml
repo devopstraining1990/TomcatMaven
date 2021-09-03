@@ -1,0 +1,26 @@
+---
+
+- name: Start MongoDB Service for Debian
+  service:
+    name: mongod
+    state: started
+  when: ansible_facts['os_family'] == "Debian"
+
+
+- name: Start MongoDB Service for RHEL
+  service:
+    name: mongod
+    state: started
+  when: ansible_facts['os_family'] == "RedHat" 
+
+
+- name: Set env variable
+  win_command: cmd.exe /c setx path "%PATH%;C:\Program Files\MongoDB\Server\{{ major_version }}\bin" /M
+  when: ansible_facts['os_family'] == "Windows" 
+
+- name: Start MongoDB service for windows
+  win_service:
+    name: MongoDB
+    start_mode: auto
+    state: started  
+  when: ansible_facts['os_family'] == "Windows"

@@ -1,0 +1,39 @@
+---
+- name: Add MongoDB repo in RedHat
+  yum_repository:
+    name: mongodb
+    baseurl: https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/{{ major_version }}/x86_64/
+    description: MongoDB Yum repo
+    gpgcheck: yes
+    enabled: yes
+    gpgkey: https://www.mongodb.org/static/pgp/server-{{ major_version }}.asc
+  when: ansible_facts['os_family'] == "RedHat"
+
+  #- name: Add Mongo key in Debian 
+  #shell:
+  #cmd: wget -qO - https://www.mongodb.org/static/pgp/server-{{ major_version }}.asc | apt-key add -
+  #when: ansible_facts['os_family'] == "Debian"
+ 
+- name: Add an Apt signing key for MongoDB
+  ansible.builtin.apt_key:
+    url: https://www.mongodb.org/static/pgp/server-{{ major_version }}.asc
+    state: present
+  when: ansible_facts['os_family'] == "Debian"   
+                                
+  #- name: Add Mongo Repo in Debian
+  #shell:
+  # cmd: echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release }}/mongodb-org/{{ major_version }} multiverse" | tee /etc/apt/sources.list.d/mongodb-org-{{ major_version }}.list
+  #when: ansible_facts['os_family'] == "Debian"  
+
+- name: Add Mongo Repo in Debian
+  ansible.builtin.apt_repository:
+    repo: deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release }}/mongodb-org/{{ major_version }} multiverse          
+    state: present
+    filename: /etc/apt/sources.list.d/mongodb-org-{{ major_version }}
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Download MSI file for MongoDB
+  win_get_url:
+    url: https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-{{ major_version }}.{{ minor_version }}-signed.msi
+    dest: C:\\Users\\mongodb.msi   
+  when: ansible_facts['os_family'] == "Windows"  

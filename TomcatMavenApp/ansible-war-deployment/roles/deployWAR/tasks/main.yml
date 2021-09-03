@@ -1,0 +1,31 @@
+---
+- name: Download the artifact from the Nexus repo
+  get_url:
+    url_username: admin
+    url_password: admin@123 
+    url: http://localhost:8081/repository/java-repo/com/sarav/TomcatMaven/2.0/TomcatMaven-2.0.war
+    dest: /tmp/TomcatMaven.war
+  delegate_to: localhost  
+
+
+- name: Add War file to webapps folder
+  ansible.builtin.copy:
+    src: /tmp/TomcatMaven.war
+    dest: /tmp/apache-tomcat-9.0.52/webapps
+    #    remote_src: yes
+
+  #- name: Add Mongo key in Debian 
+  #shell:
+  #cmd: wget -qO - https://www.mongodb.org/static/pgp/server-{{ major_version }}.asc | apt-key add -
+  #when: ansible_facts['os_family'] == "Debian"
+ 
+  #- name: Add an Apt signing key for MongoDB
+  #ansible.builtin.apt_key:
+  # url: https://www.mongodb.org/static/pgp/server-{{ major_version }}.asc
+  # state: present
+  #when: ansible_facts['os_family'] == "Debian"   
+                                
+  #- name: Add Mongo Repo in Debian
+  #shell:
+  # cmd: echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release }}/mongodb-org/{{ major_version }} multiverse" | tee /etc/apt/sources.list.d/mongodb-org-{{ major_version }}.list
+  #when: ansible_facts['os_family'] == "Debian"  

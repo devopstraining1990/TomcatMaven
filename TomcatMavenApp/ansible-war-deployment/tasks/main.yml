@@ -1,0 +1,10 @@
+---
+
+#- name: Installation of MongoDB in windows server  
+  #gather_facts: yes
+- hosts: "{{ target_node }}"
+  #become: "{{ become_yes }}"  
+- name: Get the ansible distribution
+  shell:
+    cmd: ls -lsart
+    chdir: /home
