@@ -9,24 +9,25 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'cd $WORSKPACE'
+                sh 'cd $WORSKPACE/TomcatMavenApp'
                 sh 'mvn clean install'
             }
         }
         stage('Packaging') {
             steps {
-                sh 'cd $WORKSPACE'
+                sh 'cd $WORSKPACE/TomcatMavenApp'
                 sh 'mvn package'
             }
         }
         stage('Upload to nexus') {
             steps {
+				sh 'cd $WORSKPACE/TomcatMavenApp'
                 sh 'curl -v -u admin:admin@123 --upload-file target/TomcatMavenApp-2.0.war http://localhost:8081/repository/java-repo/com.sarav/TomcatMavenApp/2.0/TomcatMavenApp-2.0.war'
             }
         }
         stage('Ansible deployment') {
             steps {
-                sh 'cd $WORKSPACE'
+                sh 'cd $WORSKPACE/TomcatMavenApp'
                 sh 'ansible-playbook ansible-war-deployment/playbook.yml -i ansible-war-deployment/hosts -e target_node=deploy_container'
             }
         }

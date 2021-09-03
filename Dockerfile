@@ -21,3 +21,4 @@ RUN cp target/*.war /usr/local/tomcat/webapps.dist
 RUN rm -rf /usr/local/tomcat/webapps/
 
 RUN mv /usr/local/tomcat/webapps.dist /usr/local/tomcat/webapps
+
