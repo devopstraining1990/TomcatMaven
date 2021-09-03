@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  labels: 
+    app: tomcat-image
+  name: tomcat-image
+  namespace: tomcat-container
+spec: 
+  replicas: 3
+  selector: 
+    matchLabels: 
+      app: tomcat-image
+  template: 
+    metadata: 
+      labels: 
+        app: tomcat-image
+    spec: 
+      containers: 
+        - image: "docker.io/surendharselvakumar/tomcat-image:1.0.1"
+          name: tomcat-image
+          ports: 
+            - containerPort: 8888
+              protocol: TCP            
+                
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+  labels:
+    app: tomcat-image
+  name: tomcat-backend-service
+  namespace: tomcat-container
+spec:
+  ports:
+  - port: 8888 #port accessing in the server
+    protocol: TCP
+    targetPort: 8080 #port exposed in docker container
+  selector:
+    app: tomcat-image
+  type: LoadBalancer  #Using LoadBalancer type to test in the dev envi, can be changed to NodePort or ClusterIP and modify the ingress hostname to access the backend-service in the frontend
+status:
+  loadBalancer:
+    ingress:
+    - hostname: localhost
