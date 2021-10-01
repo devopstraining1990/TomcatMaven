@@ -1,6 +1,6 @@
 FROM tomcat:latest
 
-EXPOSE 8888
+EXPOSE 7070
 
 RUN apt-get update
 
