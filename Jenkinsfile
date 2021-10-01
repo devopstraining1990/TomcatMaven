@@ -79,8 +79,7 @@ pipeline {
             }
             steps {
                 sh '''
-					cd $WORKSPACE/
-					echo "surendhar" | sudo -S chmod 0777 /var/run/docker.sock
+					cd $WORKSPACE/					
 					docker login -u surendharselvakumar -p Suren2302%
 				'''
             }
