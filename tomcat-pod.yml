@@ -45,3 +45,25 @@ status:
   loadBalancer:
     ingress:
     - hostname: localhost
+    
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-tomcat
+  namespace: tomcat-container
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: localhost 
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: tomcat-backend-service
+            port:
+              number: 7070
