@@ -8,7 +8,7 @@
       #target_node: "{{ target_node }}"
       #become_yes: "{{ become_yes }}"  
   hosts: "{{ target_node }}"
-  become: true
+  become: false
   roles:
           #- my-role
           #- createDir
