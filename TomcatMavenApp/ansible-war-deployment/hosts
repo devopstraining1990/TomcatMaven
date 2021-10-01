@@ -6,7 +6,7 @@ ansible_user=vagrant
 ansible_password=vagrant
 
 [deploy_container]
-172.19.0.3
+172.18.0.2
 
 [deploy_container:vars]
 ansible_connection=ssh
