@@ -106,6 +106,33 @@ pipeline {
 					docker push ${docker_repo}/${image_name}:${tag_name}
 				'''
             }
-        }        
+        }
+	stage ('Replace tag in yaml file') {
+	  when {
+	     expression { params.deploymentType == 'kubernetes' }
+	  }
+	  steps {
+		sh '''
+				cd $WORKSPACE
+				sed -e 's/image-version/${image_name:${tag_name}}/g' tomcat-pod.yml 
+		'''
+	  }
+	}
+	
+	stage('Deploy yaml in kubernetes') {
+	
+	  when{
+	    expression { params.deploymentType == 'kubernetes' }
+	  }
+	  steps {
+		sh '''
+		
+		  		cd $WORKSPACE
+				kubectl apply -f tomcat-image.yml
+
+		'''		
+	  }
+
+	}        
     }
 }
