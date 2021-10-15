@@ -114,7 +114,7 @@ pipeline {
 	  steps {
 		sh '''
 				cd $WORKSPACE
-				sed -e 's/image-version/${image_name:${tag_name}}/g' tomcat-pod.yml 
+				sed -i 's/image-version/${image_name:${tag_name}}/g' tomcat-pod.yml 
 		'''
 	  }
 	}
