@@ -113,8 +113,8 @@ pipeline {
 	  }
 	  steps {
 		sh 'cd $WORKSPACE'
-		sh 'chmod +x replace.sh'
-		sh './replace.sh ${image_name} ${tag_name}'
+		sh 'chmod +x $WORKSPACE/replace.sh'
+		sh '$WORKSPACE/replace.sh ${image_name} ${tag_name}'
 	  }
 	}
 	
