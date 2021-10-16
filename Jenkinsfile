@@ -18,6 +18,7 @@ pipeline {
     
     environment {
       maven = "/usr/bin/mvn"
+      image-version = {}
     }
     
 
@@ -113,25 +114,8 @@ pipeline {
 	  }
 	  steps {
 		sh 'cd $WORKSPACE'
-		sh 'chmod +x $WORKSPACE/replace.sh'
-		sh 'sh $WORKSPACE/replace.sh ${image_name} ${tag_name}'
+		sh 'sed -i "s/image-version/${image_name}/g" tomcat-pod.yml
 	  }
-	}
-	
-	stage('Deploy yaml in kubernetes') {
-	
-	  when{
-	    expression { params.deploymentType == 'kubernetes' }
-	  }
-	  steps {
-		sh '''
-		
-		  		cd $WORKSPACE
-				kubectl apply -f tomcat-image.yml
-
-		'''		
-	  }
-
 	}        
     }
 }
