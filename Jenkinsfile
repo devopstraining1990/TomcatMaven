@@ -112,10 +112,9 @@ pipeline {
 	     expression { params.deploymentType == 'kubernetes' }
 	  }
 	  steps {
-		sh '''
-				cd $WORKSPACE
-				sed -i 's/image-version/${image_name:${tag_name}}/g' tomcat-pod.yml 
-		'''
+		sh "
+		  cd $WORKSPACE
+		  sed -i 's/image-version/${image_name}:${tag_name}/g' tomcat-pod.yml "
 	  }
 	}
 	
