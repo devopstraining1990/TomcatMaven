@@ -91,7 +91,7 @@ pipeline {
             steps {
                 sh '''
 					cd $WORKSPACE/
-					docker build --network=host -t ${image_name}:${tag_name} . // --network=host -> Allowing the docker to pick host network to build the image
+					docker build --network=host -t ${image_name}:${tag_name} .
 					docker tag ${image_name}:${tag_name} ${docker_repo}/${image_name}:${tag_name}
 				'''
             }
