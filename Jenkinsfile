@@ -113,7 +113,7 @@ pipeline {
 	  }
 	  steps {
 		sh 'cd $WORKSPACE'
-		sh 'sed -i 's/image-version/${image_name}:${tag_name}/g' tomcat-pod.yml'
+		sh './replace.sh ${image_name} ${tag_name}'
 	  }
 	}
 	
