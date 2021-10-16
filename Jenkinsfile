@@ -91,7 +91,7 @@ pipeline {
             steps {
                 sh '''
 					cd $WORKSPACE/
-					docker build --network=host -t ${image_name}:${tag_name} .
+					docker build -t ${image_name}:${tag_name} .
 					docker tag ${image_name}:${tag_name} ${docker_repo}/${image_name}:${tag_name}
 				'''
             }
@@ -124,6 +124,7 @@ pipeline {
 	  steps {
 	  	sh 'cd $WORKSPACE'
 		sh 'cat tomcat-pod.yml'
+		sh 'kubectl apply -f tomcat-pod.yml'
 	  }
 	 }
     }
