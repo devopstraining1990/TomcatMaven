@@ -18,7 +18,6 @@ pipeline {
     
     environment {
       maven = "/usr/bin/mvn"
-      image-version = {}
     }
     
 
