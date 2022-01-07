@@ -11,7 +11,7 @@
 - name: Add War file to webapps folder
   ansible.builtin.copy:
     src: /tmp/TomcatMaven.war
-    dest: /tmp/apache-tomcat-8.5.71/webapps
+    dest: /usr/local/tomcat/webapps
     #    remote_src: yes
 
   #- name: Add Mongo key in Debian 
