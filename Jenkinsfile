@@ -124,7 +124,6 @@ pipeline {
 	  steps {
 	  	sh 'cd $WORKSPACE'
 		sh 'cat tomcat-pod.yml'
-		sh 'kubectl apply -f tomcat-pod.yml'
 	  }
 	 }
     }
