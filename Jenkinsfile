@@ -107,24 +107,5 @@ pipeline {
 				'''
             }
         }
-	stage ('Replace tag in yaml file') {
-	  when {
-	     expression { params.deploymentType == 'kubernetes' }
-	  }
-	  steps {
-		sh 'cd $WORKSPACE'
-		sh 'sed -i "s/image-version/${image_name}/g" tomcat-pod.yml'
-		sh 'sed -i "s/tag-version/${tag_name}/g" tomcat-pod.yml'
-	  }
-	}
-	stage ('Deploy yaml in cluster') {
-	  when {
-	    expression { params.deploymentType == "kubernetes" }
-	  }
-	  steps {
-	  	sh 'cd $WORKSPACE'
-		sh 'cat tomcat-pod.yml'
-	  }
-	 }
     }
 }
