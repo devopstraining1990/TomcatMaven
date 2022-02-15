@@ -16,7 +16,7 @@ metadata:
   name: tomcat-image
   namespace: tomcat-container
 spec: 
-  replicas: 3
+  replicas: 1
   selector: 
     matchLabels: 
       app: tomcat-image
@@ -26,7 +26,7 @@ spec:
         app: tomcat-image
     spec: 
       containers: 
-        - image: "docker.io/surendharselvakumar/image-version:tag-version"
+        - image: "docker.io/surendharselvakumar/tomcat-image:1.0.18"
           name: tomcat-image
           ports: 
             - containerPort: 8888
@@ -57,3 +57,25 @@ status:
   loadBalancer:
     ingress:
     - hostname: localhost
+    
+# ---
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+  # name: tomcat-ingress-frontend
+  # namespace: tomcat-container
+  # annotations:
+    # nginx.ingress.kubernetes.io/rewrite-target: /
+# spec:
+  # rules:
+  # - host: tomcat-frontend.com 
+    # http:
+      # paths:
+      # - pathType: Prefix
+        # path: /
+        # backend:
+          # service:
+            # name: tomcat-backend-service
+            # port:
+              # number: 8888
