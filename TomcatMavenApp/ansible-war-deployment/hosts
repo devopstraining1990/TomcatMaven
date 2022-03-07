@@ -6,6 +6,9 @@ ansible_user=vagrant
 ansible_password=vagrant
 
 
+[deploy_container_alternate] #Password less authentication has been enabled using ssh-keygen
+172.19.0.3
+
 [deploy_container]
 172.18.0.3
 
