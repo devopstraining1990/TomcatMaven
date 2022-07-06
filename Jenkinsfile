@@ -30,7 +30,7 @@ pipeline {
         }
         stage('GIT') {
             steps {
-                git params.git_url   
+                git sh params.git_url   
             }
         }
         stage ('Build') {
