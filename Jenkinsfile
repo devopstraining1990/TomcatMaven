@@ -18,6 +18,7 @@ pipeline {
     
     environment {
       maven = "/usr/bin/mvn"
+      git  = "/usr/bin/git"
     }
     
 
