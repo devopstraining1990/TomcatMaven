@@ -30,7 +30,7 @@ pipeline {
         }
         stage('GIT') {
             steps {
-                git sh params.git_url   
+                git sh 'https://github.com/devopstraining1990/TomcatMaven'  
             }
         }
         stage ('Build') {
