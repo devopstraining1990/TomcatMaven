@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        string defaultValue: 'https://github.com/SurenPonnusamy/TomcatMaven', name: 'git_url'
+        string defaultValue: 'https://github.com/devopstraining1990/TomcatMaven', name: 'git_url'
         string defaultValue: 'TomcatMaven', name: 'artifactId'
         string defaultValue: 'TomcatMavenApp', name: 'file'
         string defaultValue: '2.0', name: 'version'
@@ -12,7 +12,7 @@ pipeline {
         string defaultValue: 'java-repo', name: 'repository'
         string defaultValue: 'tomcat-image', name: 'image_name'
         string defaultValue: '1.0.0', name: 'tag_name'
-        string defaultValue: 'surendharselvakumar', name: 'docker_repo'
+        string defaultValue: 'devopstraining1990', name: 'docker_repo'
         choice(choices: ['kubernetes' , 'ansible'],description: '',name: 'deploymentType')
     }
     
